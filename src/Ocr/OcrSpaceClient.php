@@ -29,12 +29,14 @@ class OcrSpaceClient implements OcrClientInterface
         }
 
         try {
+            $extension = $image instanceof File ? strtoupper($image->guessExtension() ?? $image->getExtension() ?? '') : strtoupper(pathinfo($filePath, PATHINFO_EXTENSION));
             $options = [
                 'body' => [
                     'apikey' => $this->apiKey ?: 'helloworld',
                     'file' => $fileResource,
                     'language' => 'fre',
                     'isOverlayRequired' => 'false',
+                    'filetype' => $extension,
                 ],
                 'headers' => [
                     'Accept' => 'application/json',
