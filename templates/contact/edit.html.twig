@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Éditer le Contact{% endblock %}
+
+{% block body %}
+<article>
+    <header>
+        <h2>Éditer le Contact</h2>
+    </header>
+
+{% component 'Form' with {form: form} %}{% endcomponent %}
+</article>
+{% endblock %}

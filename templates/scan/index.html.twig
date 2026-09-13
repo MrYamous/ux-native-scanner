@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Scanner une carte de visite{% endblock %}
+
+{% block body %}
+<div class="max-w-2xl mx-auto">
+    <h2 class="text-2xl font-bold mb-4">Scanner une carte de visite</h2>
+    {% component 'Card' %}
+        {% block content %}
+            {% component 'Card:Header' %}
+                {% block content %}
+                    {% component 'Card:Title' %}
+                        {% block content %}📷 Scanner une carte de visite{% endblock %}
+                    {% endcomponent %}
+                    {% component 'Card:Description' %}
+                        {% block content %}Prenez ou téléchargez une photo de carte de visite. L’OCR en extrait le texte et pré-remplit les informations du contact.{% endblock %}
+                    {% endcomponent %}
+                {% endblock %}
+            {% endcomponent %}
+
+            {% component 'Card:Content' %}
+                {% block content %}
+{{ form_start(scanForm, {'attr': {'enctype': 'multipart/form-data', 'class': 'space-y-6'}}) }}
+    <div>
+        {{ form_label(scanForm.image, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-2'}}) }}
+        {{ form_widget(scanForm.image, {'attr': {'class': 'block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 border border-slate-200 rounded-md p-2'}}) }}
+        {{ form_errors(scanForm.image) }}
+    </div>
+
+    <div>
+        {{ form_label(scanForm.event, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-2'}}) }}
+        {{ form_widget(scanForm.event, {'attr': {'class': 'w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400'}}) }}
+        {{ form_errors(scanForm.event) }}
+    </div>
+
+    {% component 'Button' with {type: 'submit', class: 'w-full py-2.5 text-base'} %}
+        {% block content %}Lancer l'analyse OCR 🚀{% endblock %}
+    {% endcomponent %}
+{{ form_end(scanForm) }}
+                {% endblock %}
+            {% endcomponent %}
+        {% endblock %}
+    {% endcomponent %}
+</div>
+{% endblock %}

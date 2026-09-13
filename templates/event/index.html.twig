@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Évènements{% endblock %}
+
+{% block body %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <h2>Évènements ({{ events|length }})</h2>
+    <a href="{{ path('app_event_new') }}" role="button">➕ Nouvel Évènement</a>
+</div>
+
+{% if events is empty %}
+    <p>Aucun évènement enregistré pour le moment.</p>
+{% else %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Lieu</th>
+                <th>Dates</th>
+                <th>Contacts liés</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_event_show', {'id': event.id}) }}">
+                            <strong>{{ event.name }}</strong>
+                        </a>
+                    </td>
+                    <td>{{ event.location ?: '-' }}</td>
+                    <td>
+                        {% if event.startDate %}{{ event.startDate|date('d/m/Y') }}{% endif %}
+                        {% if event.endDate %} au {{ event.endDate|date('d/m/Y') }}{% endif %}
+                    </td>
+                    <td>{{ event.contacts|length }}</td>
+                    <td>
+                        <a href="{{ path('app_event_show', {'id': event.id}) }}">Voir</a> | 
+                        <a href="{{ path('app_event_edit', {'id': event.id}) }}">Éditer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}

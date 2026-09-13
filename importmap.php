@@ -28,4 +28,6 @@ return [
     '@symfony/stimulus-bundle' => ['path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js'],
     '@hotwired/hotwire-native-bridge' => ['version' => '1.2.2'],
     '@hotwired/turbo' => ['version' => '8.0.23'],
+    'shadcn/dist/tailwind.css' => ['version' => '4.21.0', 'type' => 'css'],
+    'tw-animate-css/dist/tw-animate.css' => ['version' => '1.4.0', 'type' => 'css'],
 ];

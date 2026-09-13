@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact : {{ contact.firstname }} {{ contact.lastname }}{% endblock %}
+
+{% block body %}
+<div class="max-w-3xl mx-auto space-y-6">
+    <div class="flex justify-between items-center">
+        <a href="{{ path('app_contact_index') }}">
+            {% component 'Button' with {variant: 'ghost', size: 'sm'} %}
+                {% block content %}← Retour à la liste{% endblock %}
+            {% endcomponent %}
+        </a>
+        <a href="{{ path('app_contact_edit', {'id': contact.id}) }}">
+            {% component 'Button' with {variant: 'outline', size: 'sm'} %}
+                {% block content %}✏️ Éditer{% endblock %}
+            {% endcomponent %}
+        </a>
+    </div>
+
+    {% component 'Card' %}
+        {% block content %}
+            {% component 'Card:Header' %}
+                {% block content %}
+                    {% component 'Card:Title' %}
+                        {% block content %}{{ contact.firstname }} {{ contact.lastname }}{% endblock %}
+                    {% endcomponent %}
+                    {% if contact.jobTitle or contact.company %}
+                        {% component 'Card:Description' %}
+                            {% block content %}{{ contact.jobTitle }} {% if contact.company %}chez <strong class="text-slate-700">{{ contact.company }}</strong>{% endif %}{% endblock %}
+                        {% endcomponent %}
+                    {% endif %}
+                {% endblock %}
+            {% endblock %}
+
+            {% component 'Card:Content' %}
+                {% block content %}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3">
+                            <h3 class="text-sm font-semibold text-slate-900 border-b border-slate-100 pb-2">Coordonnées</h3>
+                            <dl class="space-y-2 text-sm">
+                                <div>
+                                    <dt class="text-xs text-slate-400">Email</dt>
+                                    <dd>{% if contact.email %}<a href="mailto:{{ contact.email }}" class="text-blue-600 hover:underline">{{ contact.email }}</a>{% else %}<span class="text-slate-400 font-italic">Non renseigné</span>{% endif %}</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-xs text-slate-400">Téléphone</dt>
+                                    <dd>{{ contact.phone ?: 'Non renseigné' }}</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-xs text-slate-400">Site Web</dt>
+                                    <dd>{% if contact.website %}<a href="{{ contact.website }}" target="_blank" class="text-blue-600 hover:underline">{{ contact.website }}</a>{% else %}<span class="text-slate-400 font-italic">Non renseigné</span>{% endif %}</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-xs text-slate-400">Adresse</dt>
+                                    <dd>{{ contact.address ?: 'Non renseignée' }}</dd>
+                                </div>
+                            </dl>
+                        </div>
+
+                        <div class="space-y-3">
+                            <h3 class="text-sm font-semibold text-slate-900 border-b border-slate-100 pb-2">Évènements rencontrés</h3>
+                            <div class="flex flex-wrap gap-2">
+                                {% for event in contact.events %}
+                                    <a href="{{ path('app_event_show', {'id': event.id}) }}">
+                                        {% component 'Badge' with {variant: 'secondary'} %}
+                                            {% block content %}📅 {{ event.name }}{% endblock %}
+                                        {% endcomponent %}
+                                    </a>
+                                {% else %}
+                                    <p class="text-xs text-slate-400 font-italic">Aucun évènement associé</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if contact.notes %}
+                        <div class="mt-6 pt-6 border-t border-slate-100">
+                            <h3 class="text-sm font-semibold text-slate-900 mb-2">Notes & OCR</h3>
+                            <p class="text-sm text-slate-600 bg-slate-50 p-4 rounded-md whitespace-pre-wrap font-mono text-xs">{{ contact.notes }}</p>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+            {% endblock %}
+        {% endblock %}
+    {% endcomponent %}
+</div>
+{% endblock %}

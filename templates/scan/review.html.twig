@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vérification du Contact{% endblock %}
+
+{% block body %}
+<div class="max-w-3xl mx-auto">
+    {% component 'Card' %}
+        {% block content %}
+            {% component 'Card:Header' %}
+                {% block content %}
+                    {% component 'Card:Title' %}
+                        {% block content %}✏️ Vérifier et compléter le Contact{% endblock %}
+                    {% endcomponent %}
+                    {% component 'Card:Description' %}
+                        {% block content %}Les données ci-dessous ont été extraites par l'OCR. Vous pouvez les corriger avant de valider l'enregistrement.{% endblock %}
+                    {% endcomponent %}
+                {% endblock %}
+            {% endblock %}
+
+            {% component 'Card:Content' %}
+                {% block content %}
+                    {% if ocrData and ocrData.rawText %}
+                        <details class="mb-6 rounded-md bg-slate-50 border border-slate-200 p-4 text-xs font-mono">
+                            <summary class="font-sans font-medium text-slate-700 cursor-pointer mb-2">Voir le texte brut extrait par l'OCR</summary>
+                            <pre class="whitespace-pre-wrap text-slate-600 mt-2">{{ ocrData.rawText }}</pre>
+                        </details>
+                    {% endif %}
+
+                    {{ form_start(contactForm, {'attr': {'class': 'space-y-4'}}) }}
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                {{ form_label(contactForm.firstname, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-1'}}) }}
+                                {{ form_widget(contactForm.firstname, {'attr': {'class': 'w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400'}}) }}
+                            </div>
+                            <div>
+                                {{ form_label(contactForm.lastname, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-1'}}) }}
+                                {{ form_widget(contactForm.lastname, {'attr': {'class': 'w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                {{ form_label(contactForm.email, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-1'}}) }}
+                                {{ form_widget(contactForm.email, {'attr': {'class': 'w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400'}}) }}
+                            </div>
+                            <div>
+                                {{ form_label(contactForm.phone, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-1'}}) }}
+                                {{ form_widget(contactForm.phone, {'attr': {'class': 'w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                {{ form_label(contactForm.company, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-1'}}) }}
+                                {{ form_widget(contactForm.company, {'attr': {'class': 'w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400'}}) }}
+                            </div>
+                            <div>
+                                {{ form_label(contactForm.jobTitle, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-1'}}) }}
+                                {{ form_widget(contactForm.jobTitle, {'attr': {'class': 'w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400'}}) }}
+                            </div>
+                        </div>
+
+                        <div>
+                            {{ form_label(contactForm.website, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-1'}}) }}
+                            {{ form_widget(contactForm.website, {'attr': {'class': 'w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400'}}) }}
+                        </div>
+
+                        <div>
+                            {{ form_label(contactForm.address, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-1'}}) }}
+                            {{ form_widget(contactForm.address, {'attr': {'class': 'w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400'}}) }}
+                        </div>
+
+                        <div>
+                            {{ form_label(contactForm.events, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-1'}}) }}
+                            {{ form_widget(contactForm.events, {'attr': {'class': 'w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400'}}) }}
+                        </div>
+
+                        <div>
+                            {{ form_label(contactForm.notes, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-1'}}) }}
+                            {{ form_widget(contactForm.notes, {'attr': {'class': 'w-full rounded-md border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400'}}) }}
+                        </div>
+
+                        <div class="pt-4">
+                            {% component 'Button' with {type: 'submit', class: 'w-full py-2.5 text-base'} %}
+                                {% block content %}Enregistrer le Contact 💾{% endblock %}
+                            {% endcomponent %}
+                        </div>
+                    {{ form_end(contactForm) }}
+                {% endblock %}
+            {% endblock %}
+        {% endblock %}
+    {% endcomponent %}
+</div>
+{% endblock %}

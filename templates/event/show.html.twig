@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Évènement : {{ event.name }}{% endblock %}
+
+{% block body %}
+<article>
+    <header>
+        <h2>{{ event.name }}</h2>
+        {% if event.location %}<p>📍 {{ event.location }}</p>{% endif %}
+    </header>
+
+    <p>
+        <strong>Dates :</strong>
+        {% if event.startDate %}{{ event.startDate|date('d/m/Y') }}{% endif %}
+        {% if event.endDate %} au {{ event.endDate|date('d/m/Y') }}{% endif %}
+    </p>
+
+    <hr>
+
+    <h3>Contacts associés ({{ event.contacts|length }})</h3>
+    <ul>
+        {% for contact in event.contacts %}
+            <li>
+                <a href="{{ path('app_contact_show', {'id': contact.id}) }}">
+                    {{ contact.firstname }} {{ contact.lastname }}
+                </a>
+                {% if contact.company %}({{ contact.company }}){% endif %}
+            </li>
+        {% else %}
+            <li><em>Aucun contact associé pour cet évènement.</em></li>
+        {% endfor %}
+    </ul>
+
+    <footer>
+        <a href="{{ path('app_event_edit', {'id': event.id}) }}" role="button">Éditer</a>
+        <a href="{{ path('app_event_index') }}" role="button" class="secondary">Retour à la liste</a>
+    </footer>
+</article>
+{% endblock %}
