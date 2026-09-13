@@ -39,8 +39,8 @@ class ScanType extends AbstractType
                 'class' => Event::class,
                 'choice_label' => 'name',
                 'required' => false,
-                'placeholder' => '-- Aucun ou sélectionner un évènement --',
-                'label' => 'Associer immédiatement à un évènement',
+                'placeholder' => '-- Sélectionner un évènement --',
+                'label' => 'Associer à un évènement',
             ])
         ;
     }
