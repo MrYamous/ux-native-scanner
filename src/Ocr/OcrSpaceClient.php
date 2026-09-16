@@ -98,20 +98,6 @@ class OcrSpaceClient implements OcrClientInterface
             }
         }
 
-        // Tenter d'extraire nom / prénom depuis la première ligne non-email/tel/web
-        foreach ($lines as $line) {
-            if ($data->email && str_contains($line, $data->email)) continue;
-            if ($data->phone && str_contains($line, $data->phone)) continue;
-            if ($data->website && str_contains($line, $data->website)) continue;
-
-            $words = explode(' ', $line);
-            if (count($words) >= 2 && count($words) <= 3 && null === $data->firstname && null === $data->lastname) {
-                $data->firstname = $words[0];
-                $data->lastname = implode(' ', array_slice($words, 1));
-                break;
-            }
-        }
-
         return $data;
     }
 }
