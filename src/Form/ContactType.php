@@ -41,10 +41,6 @@ class ContactType extends AbstractType
                 'label' => 'Entreprise',
                 'required' => false,
             ])
-            ->add('jobTitle', TextType::class, [
-                'label' => 'Poste / Fonction',
-                'required' => false,
-            ])
             ->add('website', UrlType::class, [
                 'label' => 'Site web',
                 'required' => false,

@@ -24,9 +24,9 @@
                     {% component 'Card:Title' %}
                         {% block content %}{{ contact.firstname }} {{ contact.lastname }}{% endblock %}
                     {% endcomponent %}
-                    {% if contact.jobTitle or contact.company %}
+                    {% if contact.company %}
                         {% component 'Card:Description' %}
-                            {% block content %}{{ contact.jobTitle }} {% if contact.company %}chez <strong class="text-slate-700">{{ contact.company }}</strong>{% endif %}{% endblock %}
+                            {% block content %} <strong class="text-slate-700">{{ contact.company }}</strong>{% endblock %}
                         {% endcomponent %}
                     {% endif %}
                 {% endblock %}

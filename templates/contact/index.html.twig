@@ -31,7 +31,6 @@
                             <thead class="text-xs uppercase bg-slate-50 text-slate-500 border-b border-slate-200">
                                 <tr>
                                     <th class="px-6 py-3">Nom / Prénom</th>
-                                    <th class="px-6 py-3">Entreprise / Poste</th>
                                     <th class="px-6 py-3">Coordonnées</th>
                                     <th class="px-6 py-3">Évènements</th>
                                     <th class="px-6 py-3 text-right">Actions</th>
@@ -47,7 +46,6 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             <div>{{ contact.company ?: '-' }}</div>
-                                            {% if contact.jobTitle %}<div class="text-xs text-slate-400">{{ contact.jobTitle }}</div>{% endif %}
                                         </td>
                                         <td class="px-6 py-4">
                                             {% if contact.email %}<div class="text-xs text-slate-700">{{ contact.email }}</div>{% endif %}

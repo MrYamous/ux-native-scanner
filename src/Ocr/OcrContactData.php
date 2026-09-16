@@ -12,7 +12,6 @@ class OcrContactData
         public ?string $email = null,
         public ?string $phone = null,
         public ?string $company = null,
-        public ?string $jobTitle = null,
         public ?string $website = null,
         public ?string $address = null,
         public ?string $rawText = null,

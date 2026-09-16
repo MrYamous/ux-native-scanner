@@ -36,9 +36,6 @@ class Contact
     private ?string $company = null;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
-    private ?string $jobTitle = null;
-
-    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $website = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -141,18 +138,6 @@ class Contact
     public function setCompany(?string $company): self
     {
         $this->company = $company;
-
-        return $this;
-    }
-
-    public function getJobTitle(): ?string
-    {
-        return $this->jobTitle;
-    }
-
-    public function setJobTitle(?string $jobTitle): self
-    {
-        $this->jobTitle = $jobTitle;
 
         return $this;
     }

@@ -42,7 +42,6 @@ class ScanController extends AbstractController
                 $contact->setEmail($ocrData->email);
                 $contact->setPhone($ocrData->phone);
                 $contact->setCompany($ocrData->company);
-                $contact->setJobTitle($ocrData->jobTitle);
                 $contact->setWebsite($ocrData->website);
                 $contact->setAddress($ocrData->address);
                 if ($ocrData->rawText) {
