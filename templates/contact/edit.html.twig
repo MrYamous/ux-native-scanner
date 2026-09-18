@@ -41,7 +41,9 @@
             {{ form_errors(form.company) }}
         </div>
         <div>
-
+            {{ form_label(form.type, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-2'}}) }}
+            {{ form_widget(form.type, {'attr': {'class': 'block w-full text-sm text-slate-500 border border-slate-200 rounded-md p-2'}}) }}
+            {{ form_errors(form.type) }}
         </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -70,9 +72,6 @@
         {% block content %}Enregistrer{% endblock %}
     {% endcomponent %}
 {{ form_end(form) }}
-
-
-    
 
 </article>
 {% endblock %}

@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Enum\ContactTypeEnum;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 #[ORM\Table(name: 'contact')]
@@ -43,6 +44,9 @@ class Contact
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $notes = null;
+
+    #[ORM\Column(enumType: ContactTypeEnum::class, length: 20, options: ['default' => 'Autre'])]
+    private ContactTypeEnum $type = ContactTypeEnum::Autre;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
@@ -222,6 +226,18 @@ class Contact
     public function removeEvent(Event $event): self
     {
         $this->events->removeElement($event);
+
+        return $this;
+    }
+
+    public function getType(): ContactTypeEnum
+    {
+        return $this->type;
+    }
+
+    public function setType(ContactTypeEnum $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

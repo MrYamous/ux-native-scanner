@@ -6,8 +6,10 @@ namespace App\Form;
 
 use App\Entity\Contact;
 use App\Entity\Event;
+use App\Enum\ContactTypeEnum;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -64,7 +66,13 @@ class ContactType extends AbstractType
                 'required' => false,
                 'label' => 'Évènements associés',
             ])
-        ;
+            ->add('type', EnumType::class, [
+                'class' => ContactTypeEnum::class,
+                'choice_label' => fn (ContactTypeEnum $c) => $c->value,
+                'placeholder' => false,
+            ]);
+
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
