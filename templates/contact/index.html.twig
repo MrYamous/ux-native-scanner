@@ -30,7 +30,7 @@
                         <table class="w-full text-sm text-left text-slate-600">
                             <thead class="text-xs uppercase bg-slate-50 text-slate-500 border-b border-slate-200">
                                 <tr>
-                                    <th class="px-6 py-3">Nom / Prénom</th>
+                                    <th class="px-6 py-3">Contact</th>
                                     <th class="px-6 py-3">Coordonnées</th>
                                     <th class="px-6 py-3">Évènements</th>
                                     <th class="px-6 py-3 text-right">Actions</th>
@@ -39,13 +39,11 @@
                             <tbody class="divide-y divide-slate-100">
                                 {% for contact in contacts %}
                                     <tr class="hover:bg-slate-50/50">
-                                        <td class="px-6 py-4 font-medium text-slate-900">
+                                        <td class="px-6 py-4">
                                             <a href="{{ path('app_contact_show', {'id': contact.id}) }}" class="hover:underline">
+                                                 <div class="font-medium text-slate-900">{{ contact.company ?: '-' }}</div>
                                                 {{ contact.firstname }} {{ contact.lastname }}
                                             </a>
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <div>{{ contact.company ?: '-' }}</div>
                                         </td>
                                         <td class="px-6 py-4">
                                             {% if contact.email %}<div class="text-xs text-slate-700">{{ contact.email }}</div>{% endif %}
