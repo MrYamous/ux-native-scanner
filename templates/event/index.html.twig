@@ -3,45 +3,67 @@
 {% block title %}Liste des Évènements{% endblock %}
 
 {% block body %}
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-    <h2>Évènements ({{ events|length }})</h2>
-    <a href="{{ path('app_event_new') }}" role="button">➕ Nouvel Évènement</a>
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+    <div>
+        <h1 class="text-2xl font-bold tracking-tight text-slate-900">Évènements</h1>
+        <p class="text-sm text-slate-500">{{ events|length }} évènement(s) enregistré(s)</p>
+    </div>
+    <div class="flex gap-2">
+        <a href="{{ path('app_event_new') }}">
+            {% component 'Button' with {variant: 'default', size: 'sm'} %}
+                {% block content %}➕ Nouvel Évènement{% endblock %}
+            {% endcomponent %}
+        </a>
+    </div>
 </div>
 
-{% if events is empty %}
-    <p>Aucun évènement enregistré pour le moment.</p>
-{% else %}
-    <table>
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Lieu</th>
-                <th>Dates</th>
-                <th>Contacts liés</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for event in events %}
-                <tr>
-                    <td>
-                        <a href="{{ path('app_event_show', {'id': event.id}) }}">
-                            <strong>{{ event.name }}</strong>
-                        </a>
-                    </td>
-                    <td>{{ event.location ?: '-' }}</td>
-                    <td>
-                        {% if event.startDate %}{{ event.startDate|date('d/m/Y') }}{% endif %}
-                        {% if event.endDate %} au {{ event.endDate|date('d/m/Y') }}{% endif %}
-                    </td>
-                    <td>{{ event.contacts|length }}</td>
-                    <td>
-                        <a href="{{ path('app_event_show', {'id': event.id}) }}">Voir</a> | 
-                        <a href="{{ path('app_event_edit', {'id': event.id}) }}">Éditer</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% endif %}
+{% component 'Card' %}
+    {% block content %}
+        {% component 'Card:Content' with {class: 'p-0'} %}
+            {% block content %}
+                {% if events is empty %}
+                    <div class="p-8 text-center text-slate-500">
+                        Aucun évènement enregistré pour le moment.
+                    </div>
+                {% else %}
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-slate-600">
+                            <thead class="text-xs uppercase bg-slate-50 text-slate-500 border-b border-slate-200">
+                                <tr>
+                                    <th class="px-6 py-3">Nom</th>
+                                    <th class="px-6 py-3">Lieu</th>
+                                    <th class="px-6 py-3">Dates</th>
+                                    <th class="px-6 py-3">Contacts liés</th>
+                                    <th class="px-6 py-3 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                {% for event in events %}
+                                    <tr class="hover:bg-slate-50/50">
+                                        <td class="px-6 py-4">
+                                            <a href="{{ path('app_event_show', {'id': event.id}) }}" class="font-medium text-slate-900 hover:underline">
+                                                {{ event.name }}
+                                            </a>
+                                        </td>
+                                        <td class="px-6 py-4">{{ event.location ?: '-' }}</td>
+                                        <td class="px-6 py-4">
+                                            {% if event.startDate %}{{ event.startDate|date('d/m/Y') }}{% endif %}
+                                            {% if event.endDate %} au {{ event.endDate|date('d/m/Y') }}{% endif %}
+                                        </td>
+                                        <td class="px-6 py-4">{{ event.contacts|length }}</td>
+                                        <td class="px-6 py-4 text-right space-x-2">
+                                            <a href="{{ path('app_event_show', {'id': event.id}) }}" class="text-xs font-medium text-slate-600 hover:text-slate-900">Voir</a>
+                                            |
+                                            <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="text-xs font-medium text-slate-600 hover:text-slate-900">Éditer</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endif %}
+            {% endblock %}
+        {% endcomponent %}
+    {% endblock %}
+{% endcomponent %}
 {% endblock %}
