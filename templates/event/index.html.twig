@@ -41,9 +41,9 @@
                                 {% for event in events %}
                                     <tr class="hover:bg-slate-50/50">
                                         <td class="px-6 py-4">
-                                            <a href="{{ path('app_event_show', {'id': event.id}) }}" class="font-medium text-slate-900 hover:underline">
-                                                {{ event.name }}
-                                            </a>
+                                           <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="font-medium text-slate-900 hover:underline">{{ event.name }}</a>
+
+
                                         </td>
                                         <td class="px-6 py-4">{{ event.location ?: '-' }}</td>
                                         <td class="px-6 py-4">
@@ -52,9 +52,7 @@
                                         </td>
                                         <td class="px-6 py-4">{{ event.contacts|length }}</td>
                                         <td class="px-6 py-4 text-right space-x-2">
-                                            <a href="{{ path('app_event_show', {'id': event.id}) }}" class="text-xs font-medium text-slate-600 hover:text-slate-900">Voir</a>
-                                            |
-                                            <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="text-xs font-medium text-slate-600 hover:text-slate-900">Éditer</a>
+    <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="text-xs font-medium text-slate-600 hover:text-slate-900">Éditer</a>
                                         </td>
                                     </tr>
                                 {% endfor %}

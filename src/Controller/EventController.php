@@ -37,20 +37,12 @@ class EventController extends AbstractController
 
             $this->addFlash('success', 'Évènement créé avec succès.');
 
-            return $this->redirectToRoute('app_event_show', ['id' => $event->getId()]);
+            return $this->redirectToRoute('app_event_index');
         }
 
         return $this->render('event/new.html.twig', [
             'event' => $event,
             'form' => $form->createView(),
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_event_show', methods: ['GET'])]
-    public function show(Event $event): Response
-    {
-        return $this->render('event/show.html.twig', [
-            'event' => $event,
         ]);
     }
 
