@@ -21,8 +21,7 @@ class ScanController extends AbstractController
     #[Route('/scan', name: 'app_scan', methods: ['GET', 'POST'])]
     public function index(
         Request $request,
-        OcrClientInterface $ocrClient,
-        EntityManagerInterface $entityManager
+        OcrClientInterface $ocrClient
     ): Response {
         $scanForm = $this->createForm(ScanType::class);
         $scanForm->handleRequest($request);
@@ -37,15 +36,11 @@ class ScanController extends AbstractController
                 $ocrData = $ocrClient->extractContactData($file);
 
                 $contact = new Contact();
-                $contact->setFirstname($ocrData->firstname);
-                $contact->setLastname($ocrData->lastname);
                 $contact->setEmail($ocrData->email);
                 $contact->setPhone($ocrData->phone);
-                $contact->setCompany($ocrData->company);
                 $contact->setWebsite($ocrData->website);
-                $contact->setAddress($ocrData->address);
                 if ($ocrData->rawText) {
-                    $contact->setNotes("Texte extrait par OCR :\n" . $ocrData->rawText);
+                    $contact->setOcrData($ocrData->rawText);
                 }
 
                 if ($selectedEvent) {

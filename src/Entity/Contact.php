@@ -45,6 +45,9 @@ class Contact
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $notes = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $ocrData = null;
+
     #[ORM\Column(enumType: ContactTypeEnum::class, length: 20, options: ['default' => 'Autre'])]
     private ContactTypeEnum $type = ContactTypeEnum::Autre;
 
@@ -180,6 +183,18 @@ class Contact
         $this->notes = $notes;
 
         return $this;
+    }
+
+    public function setOcrData(?string $ocrData): self
+    {
+        $this->ocrData = $ocrData;
+
+        return $this;
+    }
+
+    public function getOcrData(): ?string
+    {
+        return $this->ocrData;
     }
 
     public function getCreatedAt(): \DateTimeImmutable

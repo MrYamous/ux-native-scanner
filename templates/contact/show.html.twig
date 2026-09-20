@@ -75,12 +75,12 @@
                         </div>
                     </div>
 
-                    {% if contact.notes %}
-                        <div class="mt-6 pt-6 border-t border-slate-100">
-                            <h3 class="text-sm font-semibold text-slate-900 mb-2">Notes & OCR</h3>
-                            <p class="text-sm text-slate-600 bg-slate-50 p-4 rounded-md whitespace-pre-wrap font-mono text-xs">{{ contact.notes }}</p>
-                        </div>
-                    {% endif %}
+                    <div class="mt-6 pt-6 border-t border-slate-100">
+                        <h3 class="text-sm font-semibold text-slate-900 mb-2">Notes & OCR</h3>
+                        <p class="text-sm text-slate-600 bg-slate-50 p-4 rounded-md whitespace-pre-wrap font-mono text-xs">{{ contact.notes }}</p>
+                        <br>
+                        <p class="text-sm text-slate-600 bg-slate-50 p-4 rounded-md whitespace-pre-wrap font-mono text-xs">{{ contact.ocrData }}</p>
+                    </div>
                 {% endblock %}
             {% endcomponent %}
         {% endblock %}
