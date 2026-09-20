@@ -57,7 +57,7 @@ class EventController extends AbstractController
 
             $this->addFlash('success', 'Évènement mis à jour avec succès.');
 
-            return $this->redirectToRoute('app_event_show', ['id' => $event->getId()]);
+            return $this->redirectToRoute('app_event_index');
         }
 
         return $this->render('event/edit.html.twig', [
