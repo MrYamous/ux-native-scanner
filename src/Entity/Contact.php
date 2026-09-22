@@ -42,6 +42,9 @@ class Contact
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $address = null;
 
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $city = null;
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $notes = null;
 
@@ -157,7 +160,17 @@ class Contact
     public function setWebsite(?string $website): self
     {
         $this->website = $website;
+        return $this;
+    }
 
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
         return $this;
     }
 
