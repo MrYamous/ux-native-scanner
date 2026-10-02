@@ -54,11 +54,6 @@ class ContactType extends AbstractType
                 'required' => false,
                 'default_protocol' => 'https',
             ])
-            ->add('address', TextareaType::class, [
-                'label' => 'Adresse',
-                'required' => false,
-                'attr' => ['rows' => 2],
-            ])
             ->add('city', ChoiceType::class, [
                 'label' => 'Ville',
                 'required' => false,

@@ -39,9 +39,6 @@ class Contact
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $website = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $address = null;
-
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $city = null;
 
