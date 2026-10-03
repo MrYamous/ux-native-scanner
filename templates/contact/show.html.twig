@@ -50,6 +50,17 @@
                                     <dt class="text-xs text-slate-400">Site Web</dt>
                                     <dd>{% if contact.website %}<a href="{{ contact.website }}" target="_blank" class="text-blue-600 hover:underline">{{ contact.website }}</a>{% else %}<span class="text-slate-400 font-italic">Non renseigné</span>{% endif %}</dd>
                                 </div>
+                                <div>
+                                    <dt class="text-xs text-slate-400">Ville</dt>
+                                    <dd>{% if contact.city %}{{ contact.city }}{% else %}<span class="text-slate-400 font-italic">Non renseignée</span>{% endif %}</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-xs text-slate-400">Département et région</dt>
+                                    <dd>
+                                        {% if contact.department %}{{ contact.department }}{% else %}<span class="text-slate-400 font-italic">Non renseigné</span>{% endif %}
+                                        {% if contact.region %}/ {{ contact.region }}{% else %}<span class="text-slate-400 font-italic">Non renseigné</span>{% endif %}
+                                    </dd>
+                                </div>
                                 <div class="mt-2">
                                     <dt class="text-xs text-slate-400">Type</dt>
                                     <dd>{{ contact.type.value }}</dd>

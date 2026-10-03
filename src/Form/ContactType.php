@@ -7,6 +7,7 @@ namespace App\Form;
 use App\Entity\Contact;
 use App\Entity\Event;
 use App\Enum\ContactTypeEnum;
+use App\EventSubscriber\CityDataSubscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
@@ -20,11 +21,15 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use App\Form\CityChoiceLoader;
 
 class ContactType extends AbstractType
 {
-    public function __construct(private UrlGeneratorInterface $urlGenerator, private CityChoiceLoader $cityChoiceLoader){}
+    public function __construct(
+        private UrlGeneratorInterface $urlGenerator,
+        private CityChoiceLoader $cityChoiceLoader,
+        private HttpClientInterface $httpClient){}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -84,9 +89,8 @@ class ContactType extends AbstractType
                 'class' => ContactTypeEnum::class,
                 'choice_label' => fn (ContactTypeEnum $c) => $c->value,
                 'placeholder' => false,
-            ]);
-
-            ;
+            ])
+            ->addEventSubscriber(new CityDataSubscriber($this->httpClient));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

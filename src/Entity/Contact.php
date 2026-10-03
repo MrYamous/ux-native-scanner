@@ -42,6 +42,12 @@ class Contact
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $city = null;
 
+    #[ORM\Column(type: Types::STRING, length: 100, nullable: true)]
+    private ?string $department = null;
+
+    #[ORM\Column(type: Types::STRING, length: 100, nullable: true)]
+    private ?string $region = null;
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $notes = null;
 
@@ -171,15 +177,25 @@ class Contact
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getDepartment(): ?string
     {
-        return $this->address;
+        return $this->department;
     }
 
-    public function setAddress(?string $address): self
+    public function setDepartment(?string $department): self
     {
-        $this->address = $address;
+        $this->department = $department;
+        return $this;
+    }
 
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?string $region): self
+    {
+        $this->region = $region;
         return $this;
     }
 

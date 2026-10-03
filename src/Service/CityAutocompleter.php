@@ -36,8 +36,8 @@ final class CityAutocompleter implements AutocompleterInterface
         foreach ($data['features'] ?? [] as $feature) {
             $props = $feature['properties'];
             $results[] = [
-                'value' => $props['citycode'],
-                'text' => $props['city'].' ('.$props['postcode'].')',
+                'value' => $props['name'],
+                'text' => $props['city'].' ('.$props['context'].')',
             ];
         }
 
