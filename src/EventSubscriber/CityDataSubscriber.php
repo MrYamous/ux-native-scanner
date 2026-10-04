@@ -10,10 +10,10 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[Exclude]
-final class CityDataSubscriber implements EventSubscriberInterface
+final readonly class CityDataSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly HttpClientInterface $httpClient,
+        private HttpClientInterface $httpClient,
     ) {
     }
 

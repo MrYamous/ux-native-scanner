@@ -28,8 +28,8 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class ContactType extends AbstractType
 {
     public function __construct(
-        private UrlGeneratorInterface $urlGenerator,
-        private HttpClientInterface $httpClient){}
+        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly HttpClientInterface $httpClient){}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

@@ -74,7 +74,7 @@ class OcrSpaceClient implements OcrClientInterface
             return $data;
         }
 
-        $lines = array_filter(array_map('trim', explode("\n", $rawText)));
+        $lines = array_filter(array_map(trim(...), explode("\n", $rawText)));
 
         foreach ($lines as $line) {
             // Email

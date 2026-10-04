@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 #[ORM\Table(name: 'event')]
-class Event
+class Event implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

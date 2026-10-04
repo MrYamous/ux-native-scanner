@@ -10,10 +10,10 @@ use Symfony\UX\Autocomplete\AutocompleteResults;
 use Symfony\UX\Autocomplete\AutocompleterInterface;
 
 #[AutoconfigureTag('ux.autocompleter', ['alias' => 'city'])]
-final class CityAutocompleter implements AutocompleterInterface
+final readonly class CityAutocompleter implements AutocompleterInterface
 {
     public function __construct(
-        private readonly HttpClientInterface $httpClient,
+        private HttpClientInterface $httpClient,
     ) {
     }
 
