@@ -19,16 +19,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use App\Form\CityChoiceLoader;
 
 class ContactType extends AbstractType
 {
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
-        private CityChoiceLoader $cityChoiceLoader,
         private HttpClientInterface $httpClient){}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -59,13 +56,15 @@ class ContactType extends AbstractType
                 'required' => false,
                 'default_protocol' => 'https',
             ])
-            ->add('city', ChoiceType::class, [
+            ->add('city', TextType::class, [
                 'label' => 'Ville',
                 'required' => false,
-                'placeholder' => 'Rechercher une ville…',
                 'autocomplete' => true,
                 'autocomplete_url' => $this->urlGenerator->generate('ux_autocomplete', ['alias' => 'city']),
-                'choice_loader' => $this->cityChoiceLoader,
+                'tom_select_options' => [
+                    'create' => true,
+                    'maxItems' => 1,
+                ],
             ])
             ->add('notes', TextareaType::class, [
                 'label' => 'Notes',
