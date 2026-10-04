@@ -22,6 +22,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
+/**
+ * @extends AbstractType<Contact>
+ */
 class ContactType extends AbstractType
 {
     public function __construct(
