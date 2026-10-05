@@ -75,7 +75,9 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "phpstan": "vendor/bin/phpstan analyse src"
+        "phpstan": "vendor/bin/phpstan analyse",
+        "rector": "vendor/bin/rector process src --dry-run",
+        "rector-fix": "vendor/bin/rector process src"
     },
     "conflict": {
         "symfony/symfony": "*"
