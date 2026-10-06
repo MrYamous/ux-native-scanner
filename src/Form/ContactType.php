@@ -25,7 +25,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 /**
  * @extends AbstractType<Contact>
  */
-class ContactType extends AbstractType
+final class ContactType extends AbstractType
 {
     public function __construct(
         private readonly UrlGeneratorInterface $urlGenerator,

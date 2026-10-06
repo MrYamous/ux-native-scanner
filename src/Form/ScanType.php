@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 /**
  * @extends AbstractType<mixed>
  */
-class ScanType extends AbstractType
+final class ScanType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
