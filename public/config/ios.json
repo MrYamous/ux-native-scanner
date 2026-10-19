@@ -1,0 +1,31 @@
+{
+    "settings": {
+        "screenshots": "replace"
+    },
+    "rules": [
+        {
+            "patterns": [
+                "/scan"
+            ],
+            "properties": {
+                "presentation": "modal"
+            }
+        },
+        {
+            "patterns": [
+                "/scan/save"
+            ],
+            "properties": {
+                "presentation": "modal"
+            }
+        },
+        {
+            "patterns": [
+                "/contacts/.*"
+            ],
+            "properties": {
+                "presentation": "default"
+            }
+        }
+    ]
+}

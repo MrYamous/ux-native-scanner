@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Scanner une carte de visite{% endblock %}
+{% block title %}{% if ux_is_native() %}Scanner{% else %}Scanner une carte de visite{% endif %}{% endblock %}
 
 {% block body %}
 <div class="max-w-2xl mx-auto">
-    <h2 class="text-2xl font-bold mb-4">Importer une carte de visite</h2>
+    {% if not ux_is_native() %}
+        <h2 class="text-2xl font-bold mb-4">Importer une carte de visite</h2>
+    {% endif %}
     {% component 'Card' %}
         {% block content %}
             {% component 'Card:Header' %}
@@ -13,7 +15,7 @@
                         {% block content %}📷 Scanner une carte de visite{% endblock %}
                     {% endcomponent %}
                     {% component 'Card:Description' %}
-                        {% block content %}Prenez ou téléchargez une photo de carte de visite. L’OCR en extrait le texte et pré-remplit les informations du contact.{% endblock %}
+                        {% block content %}Prenez ou téléchargez une photo de carte de visite. L'OCR en extrait le texte et pré-remplit les informations du contact.{% endblock %}
                     {% endcomponent %}
                 {% endblock %}
             {% endcomponent %}
@@ -21,10 +23,32 @@
             {% component 'Card:Content' %}
                 {% block content %}
                     {{ form_start(scanForm, {'attr': {'enctype': 'multipart/form-data', 'class': 'space-y-6'}}) }}
-                        <div>
-                            {{ form_label(scanForm.image, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-2'}}) }}
-                            {{ form_widget(scanForm.image, {'attr': {'class': 'block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 border border-slate-200 rounded-md p-2'}}) }}
-                            {{ form_errors(scanForm.image) }}
+                        <div data-controller="camera-scan">
+                            {% if ux_is_native() %}
+                                {# En contexte natif : bouton qui ouvre la caméra via le Bridge Component #}
+                                <button
+                                    type="button"
+                                    class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-md border-2 border-dashed border-slate-300 text-slate-600 hover:border-slate-400 hover:text-slate-800 transition-colors"
+                                    data-action="camera-scan#openCamera"
+                                >
+                                    📷 Prendre une photo avec la caméra
+                                </button>
+                                <input
+                                    type="hidden"
+                                    data-camera-scan-target="fileInput"
+                                    name="{{ scanForm.image.vars.full_name }}"
+                                >
+                                <img
+                                    data-camera-scan-target="preview"
+                                    class="hidden mt-4 rounded-md w-full object-cover"
+                                    alt="Aperçu de la carte scannée"
+                                >
+                            {% else %}
+                                {# En web : upload classique #}
+                                {{ form_label(scanForm.image, null, {'label_attr': {'class': 'block text-sm font-medium text-slate-700 mb-2'}}) }}
+                                {{ form_widget(scanForm.image, {'attr': {'class': 'block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 border border-slate-200 rounded-md p-2'}}) }}
+                                {{ form_errors(scanForm.image) }}
+                            {% endif %}
                         </div>
 
                         <div>

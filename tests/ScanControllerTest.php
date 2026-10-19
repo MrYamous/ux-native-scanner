@@ -17,7 +17,10 @@ class ScanControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/scan');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h2', 'Scanner une carte de visite');
+        // Le <h2> visible affiche le sous-titre de la Card
+        $this->assertSelectorTextContains('h2', 'Importer une carte de visite');
+        // Le <title> contient le titre de page complet (contexte web, non-natif)
+        $this->assertSelectorTextContains('title', 'Scanner une carte de visite');
     }
 
     public function testContactAndEventCrud(): void
